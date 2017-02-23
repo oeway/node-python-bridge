@@ -17,9 +17,14 @@ function pythonBridge(opts) {
         gid: opts && opts.gid,
         stdio: stdio.concat(['ipc'])
     };
+    
+    const args = intepreter.split(' ');
+    intepreter = args[0];
+    args.splice(0,1);
+    args.push(PYTHON_BRIDGE_SCRIPT);
 
     // create process bridge
-    let ps = child_process.spawn(intepreter, [PYTHON_BRIDGE_SCRIPT], options);
+    let ps = child_process.spawn(intepreter, args, options);
     let queue = singleQueue();
 
     function sendPythonCommand(type, enqueue, self) {
