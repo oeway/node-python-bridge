@@ -12,7 +12,7 @@ function pythonBridge(opts) {
     let stdio = opts && opts.stdio || ['pipe', process.stdout, process.stderr];
     let options = {
         cwd: opts && opts.cwd,
-        env: opts && opts.env,
+        env: opts && opts.env || process.env,
         uid: opts && opts.uid,
         gid: opts && opts.gid,
         stdio: stdio.concat(['ipc'])
